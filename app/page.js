@@ -71,7 +71,7 @@ function page() {
   const [data, setData] = useState();
   const [pic1, setPic1] = useState("");
   const [text, setText] = useState("");
-  const [id, setId] = useState("");
+  const [id, setId] = useState("64b84197281876c462d40978");
   const [text1, setText1] = useState(false);
   // const [active, setActive] = useState("");
   const webRef = useRef();
@@ -92,21 +92,12 @@ function page() {
     f();
   }, [takeScreenshot]);
 
-  useEffect(() => {
-    const temp = sessionStorage.getItem("temp") || 1;
-    const setT = Number(temp);
-    setTemplate(setT);
-    const i = localStorage.getItem("image");
-    const a = JSON.parse(i);
-    setLimg(a);
-  }, []);
-
-  useEffect(() => {
-    const data = sessionStorage.getItem("data");
-    const parseData = JSON.parse(data);
-    setData(parseData);
-    setId(parseData._id);
-  }, []);
+  // useEffect(() => {
+  //   const data = sessionStorage.getItem("data");
+  //   const parseData = JSON.parse(data);
+  //   setData(parseData);
+  //   setId(parseData._id);
+  // }, []);
 
   // useEffect(() => {
   //   axios.get(`${API}/v1/templates/64b84197281876c462d40978`).then((res) => {
@@ -151,6 +142,15 @@ function page() {
     "This is subheader. Stormi is a dog. She is dark grey and has long legs. Her eyes are expressive and are able to let her humans know what she is thinking."
   );
 
+  useEffect(() => {
+    const temp = sessionStorage.getItem("temp");
+    const setTs = temp ? Number(temp) : 1;
+    setTemplate(setTs);
+    const i = localStorage.getItem("image");
+    const a = JSON.parse(i);
+    setLimg(a);
+  }, []);
+
   console.log(font1);
   const [file, setFile] = useState();
   const [close, setClose] = useState(Clic);
@@ -159,10 +159,7 @@ function page() {
     try {
       const form = new FormData();
       form.append("file", d);
-      const res = await axios.post(
-        `${API}/v1/uploaddata/${id}`,
-        form
-      );
+      const res = await axios.post(`${API}/v1/uploaddata/${id}`, form);
       if (res.data.success) {
       } else {
         console.log("Error");
@@ -190,9 +187,7 @@ function page() {
 
   const getitems = useCallback(async () => {
     try {
-      const res = await axios.get(
-        `${API}/v1/getimage/${id}`
-      );
+      const res = await axios.get(`${API}/v1/getimage/${id}`);
       if (res.data.success) {
         setLink(res.data.links);
       }
@@ -262,8 +257,8 @@ function page() {
                 backgroundImage: background_color
                   ? null
                   : bgimage
-                    ? `url(${bgimage})`
-                    : null,
+                  ? `url(${bgimage})`
+                  : null,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
@@ -297,8 +292,9 @@ function page() {
                       // fontFamily: component == 2 ? font1 ? font1 : Name : font1 ? font1 : Name,
                       color: color1 ? color1 : textcolor,
                     }}
-                    className={`text-[200%] pn:max-ss:text-[50%] ss:max-pp:text-[100%] pp:max-sm:text-[160%]  font-semibold text-black w-[100%] ${active === "h1" ? "" : ""
-                      }`}
+                    className={`text-[200%] pn:max-ss:text-[50%] ss:max-pp:text-[100%] pp:max-sm:text-[160%]  font-semibold text-black w-[100%] ${
+                      active === "h1" ? "" : ""
+                    }`}
                   >
                     {header1}
                   </div>
@@ -309,8 +305,9 @@ function page() {
                       fontFamily: font2 ? font2 : Name,
                       color: color2 ? color2 : textcolor,
                     }}
-                    className={`text-[100%] pn:max-ss:text-[30%] ss:max-pp:text-[60%] pp:max-sm:text-[80%] font-semibold text-black w-[100%] my-2 ${active === "h2" ? "" : ""
-                      }`}
+                    className={`text-[100%] pn:max-ss:text-[30%] ss:max-pp:text-[60%] pp:max-sm:text-[80%] font-semibold text-black w-[100%] my-2 ${
+                      active === "h2" ? "" : ""
+                    }`}
                   >
                     {header2}
                   </div>
@@ -324,8 +321,9 @@ function page() {
                           // color: textcolor,
                           // fontFamily: Name,
                         }}
-                        className={`text-[100%] pn:max-ss:text-[30%] cursor-pointer ss:max-pp:text-[60%] pp:max-sm:text-[80%] ${active === "h3" ? "" : ""
-                          }`}
+                        className={`text-[100%] pn:max-ss:text-[30%] cursor-pointer ss:max-pp:text-[60%] pp:max-sm:text-[80%] ${
+                          active === "h3" ? "" : ""
+                        }`}
                       >
                         <div
                           style={{
@@ -368,8 +366,8 @@ function page() {
                 backgroundImage: background_color
                   ? null
                   : bgimage
-                    ? `url(${bgimage})`
-                    : null,
+                  ? `url(${bgimage})`
+                  : null,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
@@ -581,10 +579,11 @@ function page() {
                         width: "100%",
                         textAlign: "center",
                       }}
-                      className={`text-[200%] pn:max-ss:text-[50%] ss:max-pp:text-[100%] pp:max-sm:text-[160%]  font-semibold text-black w-[100%] ${active === "h1"
-                        ? "border-2 border-blue-700 rounded-lg"
-                        : ""
-                        }`}
+                      className={`text-[200%] pn:max-ss:text-[50%] ss:max-pp:text-[100%] pp:max-sm:text-[160%]  font-semibold text-black w-[100%] ${
+                        active === "h1"
+                          ? "border-2 border-blue-700 rounded-lg"
+                          : ""
+                      }`}
                     >
                       {header1}
                     </div>
@@ -609,10 +608,11 @@ function page() {
                         width: "100%",
                         textAlign: "center",
                       }}
-                      className={`text-[100%] pn:max-ss:text-[30%] ss:max-pp:text-[60%] pp:max-sm:text-[80%] font-semibold text-black w-[100%] my-2 ${active === "h2"
-                        ? "border-2 border-blue-700 rounded-lg"
-                        : ""
-                        }`}
+                      className={`text-[100%] pn:max-ss:text-[30%] ss:max-pp:text-[60%] pp:max-sm:text-[80%] font-semibold text-black w-[100%] my-2 ${
+                        active === "h2"
+                          ? "border-2 border-blue-700 rounded-lg"
+                          : ""
+                      }`}
                     >
                       {header2}
                     </div>
@@ -635,10 +635,11 @@ function page() {
                         style={{
                           ...buttoncss,
                         }}
-                        className={`text-[100%] pn:max-ss:text-[30%] cursor-pointer ss:max-pp:text-[60%] pp:max-sm:text-[80%] ${change === 2
-                          ? "border-2 border-blue-700 rounded-lg"
-                          : ""
-                          }`}
+                        className={`text-[100%] pn:max-ss:text-[30%] cursor-pointer ss:max-pp:text-[60%] pp:max-sm:text-[80%] ${
+                          change === 2
+                            ? "border-2 border-blue-700 rounded-lg"
+                            : ""
+                        }`}
                       >
                         <div style={{ fontFamily: font3 ? font3 : Name }}>
                           {Button1}
@@ -772,8 +773,8 @@ function page() {
                 backgroundImage: background_color
                   ? null
                   : bgimage
-                    ? `url(${bgimage})`
-                    : null,
+                  ? `url(${bgimage})`
+                  : null,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
@@ -908,8 +909,8 @@ function page() {
                 backgroundImage: background_color
                   ? null
                   : bgimage
-                    ? `url(${bgimage})`
-                    : null,
+                  ? `url(${bgimage})`
+                  : null,
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
@@ -1530,17 +1531,14 @@ function page() {
 
         const tempWeb = ReactDOMServer.renderToString(tempWed);
         const tempmob = ReactDOMServer.renderToString(tempPhone);
-        const res = await axios.post(
-          `${API}/v1/savetemppro/${id}`,
-          {
-            curr_template1: tempWeb,
-            curr_template2: tempmob,
-            // webt,
-            community: perf.community,
-            store: perf.store,
-            about: perf.about,
-          }
-        );
+        const res = await axios.post(`${API}/v1/savetemppro/${id}`, {
+          curr_template1: tempWeb,
+          curr_template2: tempmob,
+          // webt,
+          community: perf.community,
+          store: perf.store,
+          about: perf.about,
+        });
         // console.log(res);
         if (res.data.success) {
           console.log(res.data);
@@ -1615,16 +1613,19 @@ function page() {
             onClick={() => {
               setSwitcher(true);
             }}
-            className={` py-1 w-[100px] flex justify-center items-center rounded-lg gap-2 select-none cursor-pointer duration-100 ${switcher === true ? "bg-[#EEF2FF]" : "bg-[#f7f7f7]"
-              }`}
+            className={` py-1 w-[100px] flex justify-center items-center rounded-lg gap-2 select-none cursor-pointer duration-100 ${
+              switcher === true ? "bg-[#EEF2FF]" : "bg-[#f7f7f7]"
+            }`}
           >
             <HiOutlineDesktopComputer
-              className={`${switcher === true ? "text-[#6366F1]" : "text-[#424242]"
-                }`}
+              className={`${
+                switcher === true ? "text-[#6366F1]" : "text-[#424242]"
+              }`}
             />
             <div
-              className={`${switcher === true ? "text-[#6366F1]" : "text-[#424242]"
-                }`}
+              className={`${
+                switcher === true ? "text-[#6366F1]" : "text-[#424242]"
+              }`}
             >
               Web
             </div>
@@ -1633,16 +1634,19 @@ function page() {
             onClick={() => {
               setSwitcher(false);
             }}
-            className={` py-1 w-[100px] flex justify-center items-center rounded-lg gap-2 select-none cursor-pointer duration-100 ${switcher === false ? "bg-[#EEF2FF]" : "bg-[#f7f7f7]"
-              }`}
+            className={` py-1 w-[100px] flex justify-center items-center rounded-lg gap-2 select-none cursor-pointer duration-100 ${
+              switcher === false ? "bg-[#EEF2FF]" : "bg-[#f7f7f7]"
+            }`}
           >
             <CiMobile2
-              className={`${switcher === false ? "text-[#6366F1]" : "text-[#424242]"
-                }`}
+              className={`${
+                switcher === false ? "text-[#6366F1]" : "text-[#424242]"
+              }`}
             />
             <div
-              className={`${switcher === false ? "text-[#6366F1]" : "text-[#424242]"
-                }`}
+              className={`${
+                switcher === false ? "text-[#6366F1]" : "text-[#424242]"
+              }`}
             >
               Mobile
             </div>
@@ -1660,8 +1664,9 @@ function page() {
           // onClick={() => {
           //   setComponents(false);
           // }}
-          className={` select-none text-white px-4 py-1 hover:bg-[#6366F1] flex rounded-xl gap-1 mr-2 cursor-pointer font-semibold items-center ${savetemplate ? " bg-[#6366F1] " : "bg-[#7476ec]"
-            }`}
+          className={` select-none text-white px-4 py-1 hover:bg-[#6366F1] flex rounded-xl gap-1 mr-2 cursor-pointer font-semibold items-center ${
+            savetemplate ? " bg-[#6366F1] " : "bg-[#7476ec]"
+          }`}
         >
           <IoFlashOutline className="font-semibold" />
           <div>Set Live</div>
@@ -1678,10 +1683,11 @@ function page() {
                 dispatch(setComponent(1));
                 setComponents(false);
               }}
-              className={`${component === 1
-                ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                }`}
+              className={`${
+                component === 1
+                  ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+                  : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+              }`}
             >
               {/* <Image
                 src={Templates}
@@ -1697,10 +1703,11 @@ function page() {
                 dispatch(setComponent(2));
                 setComponents(false);
               }}
-              className={`${component === 2
-                ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                }`}
+              className={`${
+                component === 2
+                  ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+                  : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+              }`}
             >
               {/* <Image
                 src={textt}
@@ -1716,10 +1723,11 @@ function page() {
                 dispatch(setComponent(3));
                 setComponents(false);
               }}
-              className={`${component === 3
-                ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                }`}
+              className={`${
+                component === 3
+                  ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+                  : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+              }`}
             >
               {/* <Image
                 src={Elements}
@@ -1735,10 +1743,11 @@ function page() {
                 dispatch(setComponent(4));
                 setComponents(false);
               }}
-              className={`${component === 4
-                ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                }`}
+              className={`${
+                component === 4
+                  ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+                  : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+              }`}
             >
               {/* <Image
                 src={Loader}
@@ -1754,10 +1763,11 @@ function page() {
                 dispatch(setComponent(5));
                 setComponents(false);
               }}
-              className={`${component === 5
-                ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
-                }`}
+              className={`${
+                component === 5
+                  ? "flex flex-col bg-[#f6f6f6] rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+                  : "flex flex-col sm:rounded-xl w-[60px] sm:w-[60px] h-[54px] sm:h-[60px] justify-center items-center "
+              }`}
             >
               {/* <Image
                 src={Settings}
@@ -1771,10 +1781,11 @@ function page() {
         </div>
         {/* side Components*/}
         <div
-          className={` ${components
-            ? "h-[100%] w-[0px] pn:max-sm:w-[100%] pn:max-sm:h-[0%] pn:max-sm:fixed duration-300"
-            : "h-[100%] w-[500px] pn:max-sm:w-[100%] pn:max-sm:h-[70%] pn:max-sm:fixed duration-300"
-            }`}
+          className={` ${
+            components
+              ? "h-[100%] w-[0px] pn:max-sm:w-[100%] pn:max-sm:h-[0%] pn:max-sm:fixed duration-300"
+              : "h-[100%] w-[500px] pn:max-sm:w-[100%] pn:max-sm:h-[70%] pn:max-sm:fixed duration-300"
+          }`}
         >
           <div className="h-[100%] w-[100%] sm:flex sm:flex-row-reverse pn:max-sm:w-[100%] pn:max-sm:h-[100%] pn:max-sm:bg-[#fff] justify-end pn:max-sm:rounded-t-xl">
             <div
@@ -1810,10 +1821,11 @@ function page() {
                     className="h-[100%] w-[50%] flex justify-center items-center"
                   >
                     <div
-                      className={`${changetemp === 0
-                        ? "text-[#868686] bg-[#dcdcdc] cursor-pointer font-medium rounded-xl w-[97%] flex h-[90%] justify-center items-center"
-                        : "text-[#868686] cursor-pointer font-medium"
-                        }`}
+                      className={`${
+                        changetemp === 0
+                          ? "text-[#868686] bg-[#dcdcdc] cursor-pointer font-medium rounded-xl w-[97%] flex h-[90%] justify-center items-center"
+                          : "text-[#868686] cursor-pointer font-medium"
+                      }`}
                     >
                       Templates
                     </div>
@@ -1825,10 +1837,11 @@ function page() {
                     className="h-[100%] w-[50%] flex justify-center items-center"
                   >
                     <div
-                      className={`${changetemp === 1
-                        ? "text-[#868686] bg-[#dcdcdc] cursor-pointer font-medium  rounded-xl w-[97%] flex h-[90%] justify-center items-center"
-                        : " text-[#868686] cursor-pointer font-medium "
-                        }`}
+                      className={`${
+                        changetemp === 1
+                          ? "text-[#868686] bg-[#dcdcdc] cursor-pointer font-medium  rounded-xl w-[97%] flex h-[90%] justify-center items-center"
+                          : " text-[#868686] cursor-pointer font-medium "
+                      }`}
                     >
                       Styles
                     </div>
@@ -1891,10 +1904,11 @@ function page() {
             {component === 2 ? (
               <div className="h-[100%] w-[100%] pn:max-sm:w-[100%] overflow-auto bg-[#fff] items-center flex flex-col pn:max-sm:rounded-t-3xl ">
                 <div
-                  className={`${text1 === false
-                    ? "hidden"
-                    : "w-[90%] flex flex-col items-center mt-2"
-                    }`}
+                  className={`${
+                    text1 === false
+                      ? "hidden"
+                      : "w-[90%] flex flex-col items-center mt-2"
+                  }`}
                 >
                   <div className=" w-[100%] text-[#424242] ">Enter text</div>
                   <textarea
@@ -1906,10 +1920,11 @@ function page() {
                   />
                 </div>
                 <div
-                  className={` ${text1 === false
-                    ? "h-[100%] w-[90%] justify-evenly mt-2"
-                    : "h-[80%] w-[90%] justify-evenly mt-2"
-                    }`}
+                  className={` ${
+                    text1 === false
+                      ? "h-[100%] w-[90%] justify-evenly mt-2"
+                      : "h-[80%] w-[90%] justify-evenly mt-2"
+                  }`}
                 >
                   {" "}
                   <div className="bg-[#f7f7f7]  border rounded-xl my-2 h-[40px] flex justify-evenly overflow-hidden w-full">
@@ -1938,10 +1953,11 @@ function page() {
                     className="h-[100%] w-[50%] flex cursor-pointer justify-center items-center"
                   >
                     <div
-                      className={`${change === 0
-                        ? "text-[#424242] text-[12px] bg-[#dcdcdc] rounded-xl w-[97%] flex h-[90%] justify-center items-center"
-                        : " text-[#424242] text-[12px] "
-                        }`}
+                      className={`${
+                        change === 0
+                          ? "text-[#424242] text-[12px] bg-[#dcdcdc] rounded-xl w-[97%] flex h-[90%] justify-center items-center"
+                          : " text-[#424242] text-[12px] "
+                      }`}
                     >
                       Image
                     </div>
@@ -1953,10 +1969,11 @@ function page() {
                     className="h-[100%] w-[50%] flex cursor-pointer justify-center items-center"
                   >
                     <div
-                      className={`${change === 1
-                        ? "text-[#424242] text-[12px] bg-[#dcdcdc] rounded-xl w-[97%] flex h-[90%] justify-center items-center"
-                        : " text-[#424242] text-[12px] "
-                        }`}
+                      className={`${
+                        change === 1
+                          ? "text-[#424242] text-[12px] bg-[#dcdcdc] rounded-xl w-[97%] flex h-[90%] justify-center items-center"
+                          : " text-[#424242] text-[12px] "
+                      }`}
                     >
                       Background
                     </div>
@@ -1968,10 +1985,11 @@ function page() {
                     className="h-[100%] w-[50%] flex cursor-pointer justify-center items-center"
                   >
                     <div
-                      className={`${change === 2
-                        ? "text-[#424242] text-[12px] bg-[#dcdcdc] rounded-xl w-[97%] flex h-[90%] justify-center items-center"
-                        : " text-[#424242] text-[12px] "
-                        }`}
+                      className={`${
+                        change === 2
+                          ? "text-[#424242] text-[12px] bg-[#dcdcdc] rounded-xl w-[97%] flex h-[90%] justify-center items-center"
+                          : " text-[#424242] text-[12px] "
+                      }`}
                     >
                       Button
                     </div>
@@ -2321,16 +2339,19 @@ function page() {
               onClick={() => {
                 setSwitcher(true);
               }}
-              className={` py-1 w-[100px] flex justify-center items-center rounded-lg gap-2 select-none cursor-pointer duration-100 ${switcher === true ? "bg-[#EEF2FF]" : "bg-[#ffffff]"
-                }`}
+              className={` py-1 w-[100px] flex justify-center items-center rounded-lg gap-2 select-none cursor-pointer duration-100 ${
+                switcher === true ? "bg-[#EEF2FF]" : "bg-[#ffffff]"
+              }`}
             >
               <HiOutlineDesktopComputer
-                className={`${switcher === true ? "text-[#6366F1]" : "text-[#424242]"
-                  }`}
+                className={`${
+                  switcher === true ? "text-[#6366F1]" : "text-[#424242]"
+                }`}
               />
               <div
-                className={`${switcher === true ? "text-[#6366F1]" : "text-[#424242]"
-                  }`}
+                className={`${
+                  switcher === true ? "text-[#6366F1]" : "text-[#424242]"
+                }`}
               >
                 Web
               </div>
@@ -2339,16 +2360,19 @@ function page() {
               onClick={() => {
                 setSwitcher(false);
               }}
-              className={` py-1 w-[100px] flex justify-center items-center rounded-lg gap-2 select-none cursor-pointer duration-100 ${switcher === false ? "bg-[#EEF2FF]" : "bg-[#ffffff]"
-                }`}
+              className={` py-1 w-[100px] flex justify-center items-center rounded-lg gap-2 select-none cursor-pointer duration-100 ${
+                switcher === false ? "bg-[#EEF2FF]" : "bg-[#ffffff]"
+              }`}
             >
               <CiMobile2
-                className={`${switcher === false ? "text-[#6366F1]" : "text-[#424242]"
-                  }`}
+                className={`${
+                  switcher === false ? "text-[#6366F1]" : "text-[#424242]"
+                }`}
               />
               <div
-                className={`${switcher === false ? "text-[#6366F1]" : "text-[#424242]"
-                  }`}
+                className={`${
+                  switcher === false ? "text-[#6366F1]" : "text-[#424242]"
+                }`}
               >
                 Mobile
               </div>
@@ -2356,10 +2380,11 @@ function page() {
           </div>
           <div
             ref={webRef}
-            className={`duration-75 ${switcher === true
-              ? "h-[80%] w-[80%] bg-red-900 pn:max-ss:h-[30%] ss:max-pp:h-[40%] pp:max-sm:h-[60%] pn:max-sm:w-[98%] duration-75"
-              : "h-[500px] w-[300px] bg-slate-100"
-              }`}
+            className={`duration-75 ${
+              switcher === true
+                ? "h-[80%] w-[80%] bg-red-900 pn:max-ss:h-[30%] ss:max-pp:h-[40%] pp:max-sm:h-[60%] pn:max-sm:w-[98%] duration-75"
+                : "h-[500px] w-[300px] bg-slate-100"
+            }`}
           >
             {/* Template 1 */}
             {template === 1 ? (
