@@ -71,7 +71,7 @@ function page() {
   const [data, setData] = useState();
   const [pic1, setPic1] = useState("");
   const [text, setText] = useState("");
-  const [id, setId] = useState("64b84197281876c462d40978");
+  const [id, setId] = useState("");
   const [text1, setText1] = useState(false);
   // const [active, setActive] = useState("");
   const webRef = useRef();
@@ -92,12 +92,12 @@ function page() {
     f();
   }, [takeScreenshot]);
 
-  // useEffect(() => {
-  //   const data = sessionStorage.getItem("data");
-  //   const parseData = JSON.parse(data);
-  //   setData(parseData);
-  //   setId(parseData._id);
-  // }, []);
+  useEffect(() => {
+    const data = sessionStorage.getItem("data");
+    const parseData = JSON.parse(data);
+    setData(parseData);
+    setId(parseData._id);
+  }, []);
 
   // useEffect(() => {
   //   axios.get(`${API}/v1/templates/64b84197281876c462d40978`).then((res) => {
