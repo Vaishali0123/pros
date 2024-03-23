@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
-import Loading from "../assests/loading.json";
+import Loading from "../assests/Loading.json";
 
 const Component = () => {
   const searchparams = useSearchParams();
