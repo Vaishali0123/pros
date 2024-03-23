@@ -40,8 +40,8 @@ const Component = () => {
   return (
     <>
       <div className="fixed inset-0 w-screen flex justify-center items-center dark:bg-[#273142] bg-white h-screen">
-        <div>
-          <Lottie animationData={Loading} loop size={250} />
+        <div className="max-h-[100px] max-w-[100px] overflow-hidden">
+          <Lottie animationData={Loading} loop size={90} />
         </div>
       </div>
     </>
